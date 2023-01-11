@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>New Smeta 2-0</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<script defer type="application/javascript" src="js/QSO.js"></script>
+	<script defer type="module" src="js/newSmeta2_0.js"></script>
+</head>
+
+<body>
+	<ul>
+		<li><a href="/index.php">Home</a>
+		</li>
+		<!-- <li><a href="/newSmeta.php">Создать новую смету</a></li> -->
+		<li>Архив смет</li>
+
+	</ul>
+	<hr>
+
+	<div>
+		<h1 class="headerH1"> Предварительная смета</h1>
+
+		<!-- <div> -->
+		<div>
+			<a class="hover typ" data-onclick="toggleMenu" href="">&#8592<br>&#8212<br>&#8594</a>
+			<!-- </div> -->
+			<div class="types">
+				<!-- <div> -->
+				<div class="typ ">
+					<a class="hover" data-onclick="addSct" href="">добавить секцию(Вид работ)</a>
+				</div>
+				<div class=" typ ">
+					<a class="hover" data-onclick="toggleMistakes" data-boolean="true" href="">Отобразить скрыть строки c
+						метражом равным "0" </a>
+				</div>
+				<!-- </div>
+				<div> -->
+				<div class=" typ ">
+					<a class="hover toggleWorkElem" data-onclick="toggleWorkElem" data-boolean="true" href="">Отобразить/скрыть
+						служебные элементы (перед печатью)</a>
+				</div>
+				<div class="typ ">
+					<a class="hover" data-onclick="clearSquareTD" href=""> Очистить колонки метраж и примечание</a>
+				</div>
+				<!-- </div> -->
+				<div class=" typ ">
+					<a class="hover" data-onclick="toFixe" href="">Количество знаков после запятой (в итогах)</a>
+				</div>
+				<!-- <div class="typ ShowElem">
+				<a class="hover" data-onclick="#" href=""> </a>
+				</div> -->
+			</div>
+		</div>
+	</div>
+
+	<table>
+		<thead>
+			<tr>
+				<td colspan="1">
+					<div>По адресу:</div>
+				</td>
+				<td colspan="5">
+					<div class="adres">г.Минск </div>
+					<div class="WorkElem hover" data-onclick="UserObjectRnm">(редактировать)</div>
+
+				</td>
+				<td colspan="1">
+					<div class="date">от 23.05.02</div>
+				</td>
+			</tr>
+			<tr class="str2SmetaName">
+				<th colspan="7">
+					<div class="nameSmeta">Предварительная смета</div>
+				</th>
+			</tr>
+			<tr>
+				<th colspan="2"> выполняемые работы</th>
+				<th> метраж</th>
+				<th> количество</th>
+				<th> цена (за <br>м*2,ед,шт.)</th>
+				<th> Стоимость</th>
+				<th> Примечание</th>
+			</tr>
+		</thead>
+
+
+		<!-- данные  tBodySection будут вставлены сюда -->
+
+
+		<thead class="tableResult">
+			<!-- <tbody> -->
+			<tr class="total_tr">
+				<td colspan="2">
+					<!-- <h3>Итого:</h3> -->
+					<b>ИТОГО ВСЕ РАБОТЫ:</b>
+				</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td class="totalValue_td5">
+					<b id="globalTotal">899</b>
+				</td>
+				<td></td>
+			</tr>
+		</thead>
+	</table>
+
+	<!-- <button id="btn_modal_window">Open Modal</button> -->
+	<div id="my_modal" class="modal" data-onclick="close_modal_window">
+		<div class="modal_content">
+			<span class="close_modal_window" data-onclick="close_modal_window">×</span>
+			<h3>Введите данные!</h3>
+			<form action="" method="post" name="addStr">
+				<div class="addSrt1">
+					<p id="checkMoreParent">
+
+						ввести несколько
+						<input type="checkbox" id="checkMore" name="checkMore" data-onclickN="checkMore">
+					</p>
+
+					<p>
+					<div class="errAll err"></div>
+					</p>
+
+					<p> наименование работы:
+						<span class="errName err"></span>
+						<input name="name" type="text" placeholder="наименование" size="40" required>
+					</p>
+					<p>метраж:
+						<span class="errQuantity1 err"></span>
+						<input name="square" type="text" placeholder="m*2, м/п (ТОЛЬКО ЦИФРЫ)" size="25" autocomplete="on">
+
+					</p>
+					<p>количество подходов, слоев:
+						<span class="errQuantity2 err"></span>
+						<input name="quantity" type="text" placeholder="количество (ТОЛЬКО ЦИФРЫ)" size="25" autocomplete="on"
+							required>
+					</p>
+					<p>цена за ед. :
+						<span class="errQuantity3 err"></span>
+						<input name="rate" type="text" placeholder="m*2,ед,шт. (ТОЛЬКО ЦИФРЫ)" size="25" required autocomplete="on"
+							required>
+						<!-- <input name="total" type="hidden"> -->
+
+					</p>
+					<p>примечание:
+						<span class="errDescription err">(*не обязательное поле)</span>
+						<textarea name="description" placeholder="примечание" rows="3" cols="40"></textarea>
+					</p>
+					<input name="modalAddStr" value="true" hidden>
+					<p>
+						<button data-onclick="btn_modal_add">Добавить</button>
+						<button data-onclick="btn_modal_rnm">Изменить</button>
+					</p>
+				</div>
+			</form>
+			<form action="" method="post" name="addStr2">
+				<div class="addSrt2">
+					<p>
+						<label>Адрес объекта :<input name="adresObject" type="text" placeholder="наименование" size="40" required>
+						</label>
+					</p>
+					<p>
+						<label>Дата :<input name="dateObject" type="text" placeholder="20.02.22г" size="40" required>
+						</label>
+					</p>
+					<p>
+						<label>
+							Заголовок сметы :<input name="smetaNameObject" type="text" placeholder="Предварительная смета" size="40"
+								required>
+						</label>
+					</p>
+					<p><button id="btn_modal_rnm2">Изменить</button></p>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<template id="tBodySection">
+		<tbody class="sctNameNode">
+			<tr class="strName sctNameNode">
+				<td colspan="2">
+					<div class="remove WorkElem">
+						<a href=""><img src="/img/rename2.jpg" data-onclick="renameSct" alt="Редактировать"
+								title="Редактировать"></a>
+					</div>
+					<b class="nameElem"></b>
+					<div class="WorkElem">
+						<a href=""><img src="/img/delete2.png" class="delete" data-onclick="deleteSct" alt="Удалить Всю Секцию"
+								title="Удалить Всю Секцию"></a>
+					</div>
+				</td>
+				<td colspan="5">
+					<div class="WorkElem hover">
+						<div class="btn_modal_window" data-onclick="addStr">Добавить строку
+						</div>
+					</div>
+
+				</td>
+			</tr>
+			<!-- данные  tBodyStr будут вставлены сюда -->
+			<tr class="total_min_tr">
+				<td colspan="2">
+					<b>Итого:</b>
+				</td>
+				<td colspan="3"></td>
+				<td>
+					<b id="sctTotal">total</b>
+				</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</template>
+
+	<template id="tBodyStr">
+		<tr class="strName">
+			<td colspan="2">
+				<div class="remove WorkElem">
+					<img src="/img/rename2.jpg" data-onclick="rnmStr" alt="Редактировать" title="Редактировать">
+				</div>
+				<div class="nameElem"></div>
+				<div class="WorkElem">
+					<a href=""><img src="/img/delete2.png" class="delete" data-onclick="delStr" alt="Удалить всю строку"
+							title="Удалить всю строку"></a>
+				</div>
+			</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td class="strTotal">итог</td>
+			<td>комментарий</td>
+		</tr>
+	</template>
+	<a class="temp" href=""></a>
+
+</body>
+
+</html>
